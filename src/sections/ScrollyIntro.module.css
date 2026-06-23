@@ -1,0 +1,97 @@
+.pinned {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.panels {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  pointer-events: none;
+}
+
+.panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 480px;
+  padding: 0 var(--gutter, 2rem);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s var(--ease-out-expo, ease), transform 0.5s var(--ease-out-expo, ease);
+}
+
+/* Alternate sides so the text doesn't sit on top of the avatar as it moves */
+.panel:nth-child(odd) {
+  align-items: flex-start;
+  text-align: left;
+}
+.panel:nth-child(even) {
+  align-items: flex-end;
+  text-align: right;
+  margin-left: auto;
+}
+
+.panel.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.eyebrow {
+  font-family: var(--font-mono, monospace);
+  font-size: var(--text-sm, 0.9rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--clr-accent, #a78bfa);
+  margin-bottom: 0.75rem;
+}
+
+.heading {
+  font-family: var(--font-display, sans-serif);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.body {
+  font-size: var(--text-lg, 1.1rem);
+  color: var(--clr-text-2, rgba(255, 255, 255, 0.6));
+  max-width: 40ch;
+}
+
+.progress {
+  position: absolute;
+  right: var(--gutter, 2rem);
+  bottom: 2rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dot, .dotActive {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--clr-border-mid, rgba(255, 255, 255, 0.2));
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.dotActive {
+  background: var(--clr-accent, #a78bfa);
+  transform: scale(1.4);
+}
+
+@media (max-width: 768px) {
+  .panel {
+    max-width: 100%;
+    align-items: center !important;
+    text-align: center !important;
+    margin-left: 0 !important;
+  }
+}

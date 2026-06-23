@@ -1,0 +1,47 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.item {
+  border: 1px dashed var(--clr-border-mid, rgba(255, 255, 255, 0.2));
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+}
+
+.trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.title {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.chevron {
+  font-size: 1.4rem;
+  color: var(--clr-text-2, rgba(255, 255, 255, 0.5));
+  transition: transform 0.3s ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.panel {
+  overflow: hidden;
+  transition: max-height 0.4s var(--ease-out-expo, ease);
+}
+
+.description {
+  padding-top: 0.75rem;
+  color: var(--clr-text-2, rgba(255, 255, 255, 0.6));
+  line-height: 1.6;
+  max-width: 50ch;
+}

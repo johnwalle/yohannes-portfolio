@@ -1,0 +1,41 @@
+.dot, .ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+  opacity: 1;
+}
+
+.ring {
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border-radius: 50%;
+  border: 1px solid var(--clr-border-mid);
+  opacity: 1;
+  transition: width 0.25s var(--ease-out-expo), height 0.25s var(--ease-out-expo),
+    margin 0.25s var(--ease-out-expo), border-color 0.25s ease, background 0.25s ease, opacity 0.3s ease;
+}
+
+.ring.hover {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  border-color: transparent;
+  background: var(--clr-accent-soft);
+}
+
+@media (pointer: coarse) {
+  .dot, .ring { display: none; }
+}

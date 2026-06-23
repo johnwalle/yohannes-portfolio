@@ -1,0 +1,48 @@
+import type { Project } from '@types-local/index'
+
+export const projects: Project[] = [
+  {
+    id: 'project-alpha',
+    title: 'Project Alpha',
+    tag: 'Web App',
+    description: 'Real-time collaboration platform with WebSocket sync and end-to-end encryption.',
+    longDescription: 'A full-stack collaboration tool built for distributed teams. Features a custom rich text editor, real-time presence indicators, and AES-256 encryption.',
+    tech: ['Next.js', 'PostgreSQL', 'WebSockets', 'Redis'],
+    url: 'https://example.com',
+    github: 'https://github.com',
+    year: 2024,
+    featured: true,
+  },
+  {
+    id: 'project-beta',
+    title: 'Project Beta',
+    tag: 'SaaS',
+    description: 'Analytics dashboard for e-commerce brands with AI-powered insights.',
+    longDescription: 'Connects to Shopify, WooCommerce, and Stripe to surface revenue trends, customer cohorts, and automated weekly reports.',
+    tech: ['React', 'Node.js', 'D3.js', 'OpenAI'],
+    url: 'https://example.com',
+    year: 2024,
+    featured: true,
+  },
+  {
+    id: 'project-gamma',
+    title: 'Project Gamma',
+    tag: '3D / Creative',
+    description: 'Immersive product showcase with WebGL and physics-based interactions.',
+    longDescription: 'A Three.js-powered product page that lets users inspect a 3D model, trigger animations, and configure materials in real time.',
+    tech: ['Three.js', 'GSAP', 'React Three Fiber'],
+    github: 'https://github.com',
+    year: 2023,
+    featured: true,
+  },
+  {
+    id: 'project-delta',
+    title: 'Project Delta',
+    tag: 'Mobile',
+    description: 'Cross-platform finance app with biometric auth and spending intelligence.',
+    longDescription: 'A React Native application with offline-first sync, Face ID / fingerprint auth, and a local ML model for transaction categorisation.',
+    tech: ['React Native', 'Firebase', 'TensorFlow Lite'],
+    year: 2023,
+    featured: false,
+  },
+]

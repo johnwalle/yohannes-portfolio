@@ -1,0 +1,33 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: var(--clr-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.text {
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--clr-text-3);
+}
+
+.track {
+  width: 160px;
+  height: 1px;
+  background: var(--clr-border-mid);
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  width: 100%;
+  background: var(--clr-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+}
