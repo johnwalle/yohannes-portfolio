@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import styles from './ResumeBadge.module.css'
+import styles from './Resumebadge.module.css'
 
 const RESUME_URL = 'https://drive.google.com/file/d/1OZNNDuaLh9j4RiPWwaf8TkoSvaQIcsAj/view?usp=drive_link'
 
