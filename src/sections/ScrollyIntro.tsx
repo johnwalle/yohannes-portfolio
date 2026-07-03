@@ -6,7 +6,6 @@ import { SocialRail }     from '@components/ui/SocialRail'
 import { ResumeBadge }    from '@components/ui/ResumeBadge'
 import styles from './ScrollyIntro.module.css'
 
-const AVATAR_MODEL_URL: string | undefined = ''
 
 export function ScrollyIntro() {
   const [activeIndex, setActiveIndex] = useState(0)
@@ -17,7 +16,7 @@ export function ScrollyIntro() {
     <section ref={containerRef} className={styles.pinned} id="hero">
 
       {/* 3D Canvas — fills the background */}
-      <AvatarScene progressRef={progressRef} modelUrl={AVATAR_MODEL_URL} />
+      <AvatarScene progressRef={progressRef} />
 
       {/* Social icon rail */}
       <SocialRail />
