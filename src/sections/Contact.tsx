@@ -7,12 +7,12 @@ import styles from './Contact.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const EMAIL = 'hello@yourdomain.com'
+const EMAIL = 'leojowalle@gmail.com'
 
 const socials = [
-  { label: 'GitHub',   href: 'https://github.com'   },
-  { label: 'LinkedIn', href: 'https://linkedin.com'  },
-  { label: 'Twitter',  href: 'https://twitter.com'   },
+  { label: 'GitHub',   href: 'https://github.com/johnwalle'   },
+  { label: 'LinkedIn', href: 'https://et.linkedin.com/in/yohanneswalle'  },
+  { label: 'Twitter',  href: 'https://twitter.com/Leojo_W'   },
 ]
 
 export function Contact() {

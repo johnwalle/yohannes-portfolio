@@ -3,12 +3,85 @@
   height: 100vh;
   width: 100%;
   overflow: hidden;
+  background: #080808;
 }
 
+/* Bottom purple glow — the moncy.dev signature */
+.pinned::before {
+  content: '';
+  position: absolute;
+  bottom: -15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 420px;
+  background: radial-gradient(
+    ellipse,
+    rgba(139, 92, 246, 0.38) 0%,
+    rgba(109, 40, 217, 0.18) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Top-left orb */
+.pinned::after {
+  content: '';
+  position: absolute;
+  top: 7%;
+  left: 4%;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(167, 139, 250, 0.95) 0%,
+    rgba(139, 92, 246, 0.5) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Social icon rail — left edge */
+.socials {
+  position: absolute;
+  left: 1.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  z-index: 10;
+}
+
+.socialLink {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.socialLink:hover {
+  border-color: #a78bfa;
+  color: #a78bfa;
+}
+
+/* Text panels */
 .panels {
-  position: relative;
-  z-index: 1;
-  height: 100%;
+  position: absolute;
+  inset: 0;
+  z-index: 5;
   pointer-events: none;
 }
 
@@ -18,22 +91,24 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  max-width: 480px;
-  padding: 0 var(--gutter, 2rem);
+  max-width: 420px;
+  padding: 0 3rem 0 7rem;
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.5s var(--ease-out-expo, ease), transform 0.5s var(--ease-out-expo, ease);
+  transform: translateY(20px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Alternate sides so the text doesn't sit on top of the avatar as it moves */
-.panel:nth-child(odd) {
-  align-items: flex-start;
-  text-align: left;
-}
 .panel:nth-child(even) {
   align-items: flex-end;
   text-align: right;
+  padding: 0 7rem 0 3rem;
   margin-left: auto;
+}
+
+.panel:nth-child(odd) {
+  align-items: flex-start;
+  text-align: left;
 }
 
 .panel.active {
@@ -42,49 +117,127 @@
 }
 
 .eyebrow {
-  font-family: var(--font-mono, monospace);
-  font-size: var(--text-sm, 0.9rem);
-  letter-spacing: 0.1em;
+  font-family: 'Inter', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--clr-accent, #a78bfa);
+  color: #a78bfa;
   margin-bottom: 0.75rem;
 }
 
 .heading {
-  font-family: var(--font-display, sans-serif);
+  font-family: 'Inter', sans-serif;
   font-size: clamp(2rem, 4.5vw, 3.5rem);
-  font-weight: 700;
-  line-height: 1.1;
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #ffffff;
   margin-bottom: 1rem;
+  white-space: pre-line;
 }
 
 .body {
-  font-size: var(--text-lg, 1.1rem);
-  color: var(--clr-text-2, rgba(255, 255, 255, 0.6));
-  max-width: 40ch;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.5);
+  max-width: 36ch;
 }
 
+/* Right-side role text — hero scene only */
+.heroRole {
+  position: absolute;
+  right: 5rem;
+  top: 38%;
+  z-index: 6;
+  text-align: right;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+
+.heroRole.visible {
+  opacity: 1;
+}
+
+.heroRoleAlt {
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-weight: 800;
+  color: rgba(167, 139, 250, 0.28);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.heroRoleMain {
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-weight: 800;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+/* Scroll progress dots */
 .progress {
   position: absolute;
-  right: var(--gutter, 2rem);
-  bottom: 2rem;
-  z-index: 2;
+  right: 2rem;
+  bottom: 2.5rem;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  align-items: center;
 }
 
-.dot, .dotActive {
-  width: 6px;
-  height: 6px;
+.dot {
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: var(--clr-border-mid, rgba(255, 255, 255, 0.2));
+  background: rgba(255, 255, 255, 0.18);
   transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .dotActive {
-  background: var(--clr-accent, #a78bfa);
-  transform: scale(1.4);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #a78bfa;
+  transform: scale(1.5);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+/* Scroll hint */
+.scrollHint {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, transparent, #a78bfa);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+.scrollLabel {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.2; }
+  50%       { opacity: 1; }
 }
 
 @media (max-width: 768px) {
@@ -92,6 +245,17 @@
     max-width: 100%;
     align-items: center !important;
     text-align: center !important;
+    padding: 0 1.5rem !important;
     margin-left: 0 !important;
+    justify-content: flex-end;
+    padding-bottom: 6rem !important;
+  }
+
+  .heroRole { display: none; }
+  .socials { display: none; }
+
+  .pinned::before {
+    width: 100%;
+    height: 300px;
   }
 }

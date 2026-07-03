@@ -20,8 +20,9 @@ export function Navbar() {
 
   return (
     <nav ref={navRef} className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
+      
       <div className={styles.logo}>
-        your<span>.</span>dev
+        leojo<span>.</span>dev
       </div>
       <ul className={styles.links}>
         {navLinks.map((link) => (

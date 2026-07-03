@@ -68,3 +68,14 @@ html.has-custom-cursor button {
     transition-duration: 0.01ms !important;
   }
 }
+
+.work-card:hover .card-img      { transform: scale(1.04); }
+.work-card:hover .card-screenshot { opacity: 0.9 !important; }
+.work-card:hover .card-overlay  { transform: translateY(0) !important; }
+.work-card:hover .card-desc     { max-height: 80px !important; opacity: 1 !important; }
+.work-card:hover .card-ghost    { transform: translate(-8px,-8px) scale(1.05) !important; opacity: 0.6 !important; }
+
+.card-overlay  { transform: translateY(56px); }
+.card-desc     { max-height: 0; opacity: 0; }
+.card-ghost    { opacity: 0.35; }
+.card-img      { transition: transform 0.7s cubic-bezier(0.16,1,0.3,1); }

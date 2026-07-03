@@ -1,0 +1,314 @@
+/* ResumeBadge.module.css
+   Concept: a laminated conference ID badge, clipped to a cord, hanging in
+   the top corner of the hero. It sways gently at idle, and on hover/focus
+   it stops swinging and flips over — the back face reveals a rubber-stamp
+   "ACCESS GRANTED / DOWNLOAD" mark instead of a plain button.
+*/
+
+.rig {
+  position: fixed;
+  top: 0;
+  right: clamp(1.5rem, 5vw, 4rem);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+
+  /* entrance state: hidden above the frame */
+  opacity: 0;
+  transform: translateY(-140px);
+  transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+}
+
+.rig.dropped {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* the cord the badge hangs from */
+.cord {
+  width: 2px;
+  height: clamp(38px, 5vw, 56px);
+  background: linear-gradient(to bottom, rgba(167, 139, 250, 0.15), rgba(167, 139, 250, 0.55));
+}
+
+.clip {
+  width: 14px;
+  height: 9px;
+  margin-top: -2px;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #d8d8dc, #8a8a92);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+/* the swinging + flipping card */
+.card {
+  position: relative;
+  width: 172px;
+  height: 232px;
+  margin-top: 2px;
+  transform-style: preserve-3d;
+  transform-origin: top center;
+  transition: transform 0.65s cubic-bezier(0.2, 0.9, 0.3, 1.15);
+  animation: swing 4.2s ease-in-out infinite;
+}
+
+.rig:hover .card,
+.rig:focus-visible .card {
+  animation-play-state: paused;
+  transform: rotateX(0deg) rotateY(180deg);
+}
+
+@keyframes swing {
+  0%, 100% { transform: rotate(-4deg); }
+  50%      { transform: rotate(4deg); }
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  background: linear-gradient(160deg, #f4efe2 0%, #e7e0cd 100%);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow:
+    0 18px 40px -14px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  padding: 18px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.faceBack {
+  transform: rotateY(180deg);
+  align-items: center;
+  justify-content: center;
+}
+
+.hole {
+  width: 26px;
+  height: 7px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.18);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
+  margin-bottom: 12px;
+  flex-shrink: 0;
+}
+
+.stripe {
+  position: absolute;
+  top: 32px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: linear-gradient(90deg, #a78bfa, #818cf8);
+}
+
+.avatar {
+  margin-top: 30px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Georgia', serif;
+  font-weight: 700;
+  font-size: 19px;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: linear-gradient(135deg, #a78bfa, #6d5bd0);
+  box-shadow: 0 4px 10px -3px rgba(109, 91, 208, 0.6);
+}
+
+.label {
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: #4a3f22;
+  text-transform: uppercase;
+}
+
+.name {
+  margin-top: 6px;
+  font-size: 15px;
+  font-weight: 800;
+  color: #1c1a14;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.role {
+  margin-top: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b6656;
+  text-align: center;
+}
+
+.barcode {
+  margin-top: auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 26px;
+  padding-top: 10px;
+}
+
+.bar {
+  width: 2.5px;
+  height: 100%;
+  background: #201e18;
+  display: inline-block;
+}
+.bar:nth-child(3n) { height: 70%; }
+.bar:nth-child(5n) { height: 85%; }
+.bar:nth-child(7n) { height: 55%; }
+
+/* ---------- back face: the stamp ---------- */
+.stamp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transform: rotate(-6deg) scale(0.86);
+  opacity: 0.85;
+  transition: transform 0.5s ease 0.25s, opacity 0.5s ease 0.25s;
+}
+
+.rig:hover .stamp,
+.rig:focus-visible .stamp {
+  transform: rotate(-6deg) scale(1);
+  opacity: 1;
+}
+
+.stampRing {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: #b3382c;
+  border: 1.5px solid #b3382c;
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+.stampCore {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  color: #b3382c;
+  border: 2px solid #b3382c;
+  border-radius: 10px;
+  padding: 12px 16px 10px;
+}
+
+.stampCore span:nth-child(2) {
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  margin-top: 3px;
+}
+
+.stampSub {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
+}
+
+.hint {
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+  text-align: center;
+  white-space: nowrap;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.rig:hover .hint,
+.rig:focus-visible .hint {
+  opacity: 1;
+  color: #a78bfa;
+}
+
+/* one-time discovery callout — points at the badge, fades on its own */
+.tooltip {
+  position: absolute;
+  top: 46px;
+  right: calc(100% + 14px);
+  width: max-content;
+  max-width: 190px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: #16151c;
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 600;
+  box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.6);
+  animation: tooltipIn 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2) both,
+             tooltipOut 0.4s ease 4.4s both;
+  pointer-events: none;
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  top: 14px;
+  right: -5px;
+  width: 10px;
+  height: 10px;
+  background: #16151c;
+  border-right: 1px solid rgba(167, 139, 250, 0.35);
+  border-bottom: 1px solid rgba(167, 139, 250, 0.35);
+  transform: rotate(-45deg);
+}
+
+@keyframes tooltipIn {
+  from { opacity: 0; transform: translateX(8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes tooltipOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@media (max-width: 720px) {
+  .tooltip { right: auto; left: 50%; top: -54px; transform: translateX(-50%); }
+  .tooltip::after { display: none; }
+}
+
+.rig:focus-visible {
+  outline: 2px solid #a78bfa;
+  outline-offset: 6px;
+  border-radius: 12px;
+}
+
+@media (max-width: 720px) {
+  .rig { right: 1rem; }
+  .card { width: 132px; height: 178px; }
+  .avatar { width: 42px; height: 42px; font-size: 14px; margin-top: 18px; }
+  .label { font-size: 10px; }
+  .name { font-size: 12px; }
+  .role { font-size: 9px; }
+  .hint { font-size: 11px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { animation: none; }
+  .rig, .card, .stamp, .hint { transition-duration: 0.01ms; }
+}
