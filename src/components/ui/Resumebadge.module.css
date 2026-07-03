@@ -1,56 +1,38 @@
 /* ResumeBadge.module.css
-   Concept: a laminated conference ID badge, clipped to a cord, hanging in
-   the top corner of the hero. It sways gently at idle, and on hover/focus
-   it stops swinging and flips over — the back face reveals a rubber-stamp
-   "ACCESS GRANTED / DOWNLOAD" mark instead of a plain button.
+   Miniaturised badge pinned on top of the character's head.
+   Card is roughly half the original size; the pin sticks downward
+   into the head. Swings gently from that bottom pivot point.
 */
 
 .rig {
   position: fixed;
-  top: 0;
-  right: clamp(1.5rem, 5vw, 4rem);
+  top: 18vh;               /* sits just above the character's head */
+  left: 50%;
+  transform: translateX(-50%) translateY(-120px);   /* entrance: above frame */
   z-index: 40;
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  /* card → cord → pin, top to bottom */
   align-items: center;
   text-decoration: none;
   cursor: pointer;
-
-  /* entrance state: hidden above the frame */
   opacity: 0;
-  transform: translateY(-140px);
-  transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+  transition:
+    transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.5s ease;
 }
 
 .rig.dropped {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
 
-/* the cord the badge hangs from */
-.cord {
-  width: 2px;
-  height: clamp(38px, 5vw, 56px);
-  background: linear-gradient(to bottom, rgba(167, 139, 250, 0.15), rgba(167, 139, 250, 0.55));
-}
-
-.clip {
-  width: 14px;
-  height: 9px;
-  margin-top: -2px;
-  border-radius: 3px;
-  background: linear-gradient(135deg, #d8d8dc, #8a8a92);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
-}
-
-/* the swinging + flipping card */
+/* ── mini card ── */
 .card {
   position: relative;
-  width: 172px;
-  height: 232px;
-  margin-top: 2px;
+  width: 90px;
+  height: 122px;
   transform-style: preserve-3d;
-  transform-origin: top center;
+  transform-origin: bottom center;   /* pivots from the pin on his head */
   transition: transform 0.65s cubic-bezier(0.2, 0.9, 0.3, 1.15);
   animation: swing 4.2s ease-in-out infinite;
 }
@@ -62,21 +44,22 @@
 }
 
 @keyframes swing {
-  0%, 100% { transform: rotate(-4deg); }
-  50%      { transform: rotate(4deg); }
+  0%, 100% { transform: rotate(-5deg); }
+  50%       { transform: rotate(5deg); }
 }
 
+/* ── shared face ── */
 .face {
   position: absolute;
   inset: 0;
   backface-visibility: hidden;
-  border-radius: 12px;
+  border-radius: 7px;
   background: linear-gradient(160deg, #f4efe2 0%, #e7e0cd 100%);
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow:
-    0 18px 40px -14px rgba(0, 0, 0, 0.65),
+    0 8px 24px -8px rgba(0, 0, 0, 0.7),
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  padding: 18px 14px 16px;
+  padding: 9px 7px 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -85,49 +68,49 @@
 
 .faceBack {
   transform: rotateY(180deg);
-  align-items: center;
   justify-content: center;
 }
 
 .hole {
-  width: 26px;
-  height: 7px;
-  border-radius: 5px;
+  width: 14px;
+  height: 4px;
+  border-radius: 3px;
   background: rgba(0, 0, 0, 0.18);
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.35);
-  margin-bottom: 12px;
+  margin-bottom: 6px;
   flex-shrink: 0;
 }
 
 .stripe {
   position: absolute;
-  top: 32px;
+  top: 17px;
   left: 0;
   right: 0;
-  height: 20px;
+  height: 10px;
   background: linear-gradient(90deg, #a78bfa, #818cf8);
 }
 
 .avatar {
-  margin-top: 30px;
-  width: 56px;
-  height: 56px;
+  margin-top: 14px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: 'Georgia', serif;
   font-weight: 700;
-  font-size: 19px;
+  font-size: 9px;
   letter-spacing: 0.02em;
   color: #fff;
   background: linear-gradient(135deg, #a78bfa, #6d5bd0);
-  box-shadow: 0 4px 10px -3px rgba(109, 91, 208, 0.6);
+  box-shadow: 0 2px 6px -2px rgba(109, 91, 208, 0.6);
+  flex-shrink: 0;
 }
 
 .label {
-  margin-top: 12px;
-  font-size: 13px;
+  margin-top: 5px;
+  font-size: 6px;
   font-weight: 900;
   letter-spacing: 0.08em;
   color: #4a3f22;
@@ -135,8 +118,8 @@
 }
 
 .name {
-  margin-top: 6px;
-  font-size: 15px;
+  margin-top: 3px;
+  font-size: 7.5px;
   font-weight: 800;
   color: #1c1a14;
   text-align: center;
@@ -144,8 +127,8 @@
 }
 
 .role {
-  margin-top: 3px;
-  font-size: 11px;
+  margin-top: 1px;
+  font-size: 5.5px;
   font-weight: 600;
   color: #6b6656;
   text-align: center;
@@ -155,13 +138,13 @@
   margin-top: auto;
   display: flex;
   align-items: flex-end;
-  gap: 2px;
-  height: 26px;
-  padding-top: 10px;
+  gap: 1px;
+  height: 13px;
+  padding-top: 4px;
 }
 
 .bar {
-  width: 2.5px;
+  width: 1.5px;
   height: 100%;
   background: #201e18;
   display: inline-block;
@@ -170,14 +153,35 @@
 .bar:nth-child(5n) { height: 85%; }
 .bar:nth-child(7n) { height: 55%; }
 
-/* ---------- back face: the stamp ---------- */
+/* ── short cord from card bottom to pin ── */
+.cord {
+  width: 2px;
+  height: 18px;
+  background: linear-gradient(to bottom,
+    rgba(167, 139, 250, 0.25),
+    rgba(167, 139, 250, 0.65));
+  flex-shrink: 0;
+}
+
+/* ── pin that "sticks" into the head ── */
+.pin {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #e0d6ff, #7c5fd4);
+  box-shadow: 0 2px 5px rgba(109, 91, 208, 0.8),
+              0 0 0 1.5px rgba(167, 139, 250, 0.3);
+  flex-shrink: 0;
+}
+
+/* ── back face stamp (scaled down) ── */
 .stamp {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  transform: rotate(-6deg) scale(0.86);
+  gap: 4px;
+  transform: rotate(-6deg) scale(0.8);
   opacity: 0.85;
   transition: transform 0.5s ease 0.25s, opacity 0.5s ease 0.25s;
 }
@@ -189,97 +193,99 @@
 }
 
 .stampRing {
-  font-size: 9px;
+  font-size: 5px;
   font-weight: 800;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   color: #b3382c;
-  border: 1.5px solid #b3382c;
+  border: 1px solid #b3382c;
   border-radius: 999px;
-  padding: 4px 10px;
+  padding: 2px 5px;
 }
 
 .stampCore {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3px;
+  gap: 2px;
   color: #b3382c;
-  border: 2px solid #b3382c;
-  border-radius: 10px;
-  padding: 12px 16px 10px;
+  border: 1.5px solid #b3382c;
+  border-radius: 6px;
+  padding: 6px 8px 5px;
 }
 
 .stampCore span:nth-child(2) {
-  font-size: 15px;
+  font-size: 8px;
   font-weight: 900;
   letter-spacing: 0.06em;
-  margin-top: 3px;
+  margin-top: 2px;
 }
 
 .stampSub {
-  font-size: 10px;
+  font-size: 5px;
   font-weight: 700;
   letter-spacing: 0.04em;
   opacity: 0.85;
 }
 
+/* ── hint label below the pin ── */
 .hint {
-  margin-top: 10px;
-  font-size: 13px;
+  margin-top: 6px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.62);
+  color: rgba(255, 255, 255, 0.55);
   text-align: center;
   white-space: nowrap;
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 0.3s ease, color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .rig:hover .hint,
 .rig:focus-visible .hint {
-  opacity: 1;
   color: #a78bfa;
 }
 
-/* one-time discovery callout — points at the badge, fades on its own */
+/* ── tooltip floats above the card ── */
 .tooltip {
   position: absolute;
-  top: 46px;
-  right: calc(100% + 14px);
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
   width: max-content;
-  max-width: 190px;
-  padding: 8px 12px;
-  border-radius: 10px;
+  max-width: 170px;
+  padding: 7px 10px;
+  border-radius: 8px;
   background: #16151c;
   border: 1px solid rgba(167, 139, 250, 0.35);
   color: rgba(255, 255, 255, 0.9);
-  font-size: 13px;
+  font-size: 11px;
   line-height: 1.4;
   font-weight: 600;
-  box-shadow: 0 14px 30px -10px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.6);
   animation: tooltipIn 0.4s cubic-bezier(0.2, 0.9, 0.3, 1.2) both,
              tooltipOut 0.4s ease 4.4s both;
   pointer-events: none;
+  white-space: nowrap;
 }
 
 .tooltip::after {
   content: '';
   position: absolute;
-  top: 14px;
-  right: -5px;
-  width: 10px;
-  height: 10px;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  margin-top: -5px;
+  width: 8px;
+  height: 8px;
   background: #16151c;
   border-right: 1px solid rgba(167, 139, 250, 0.35);
   border-bottom: 1px solid rgba(167, 139, 250, 0.35);
-  transform: rotate(-45deg);
 }
 
 @keyframes tooltipIn {
-  from { opacity: 0; transform: translateX(8px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from { opacity: 0; transform: translateX(-50%) translateY(-4px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
 @keyframes tooltipOut {
@@ -287,25 +293,22 @@
   to   { opacity: 0; }
 }
 
-@media (max-width: 720px) {
-  .tooltip { right: auto; left: 50%; top: -54px; transform: translateX(-50%); }
-  .tooltip::after { display: none; }
-}
-
 .rig:focus-visible {
   outline: 2px solid #a78bfa;
-  outline-offset: 6px;
-  border-radius: 12px;
+  outline-offset: 4px;
+  border-radius: 8px;
 }
 
+/* ── mobile: head is higher up ── */
 @media (max-width: 720px) {
-  .rig { right: 1rem; }
-  .card { width: 132px; height: 178px; }
-  .avatar { width: 42px; height: 42px; font-size: 14px; margin-top: 18px; }
-  .label { font-size: 10px; }
-  .name { font-size: 12px; }
-  .role { font-size: 9px; }
-  .hint { font-size: 11px; }
+  .rig { top: 20vh; }
+  .card { width: 78px; height: 106px; }
+  .avatar { width: 24px; height: 24px; font-size: 8px; margin-top: 12px; }
+  .label { font-size: 5.5px; }
+  .name { font-size: 6.5px; }
+  .role { font-size: 5px; }
+  .hint { font-size: 8px; }
+  .cord { height: 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
